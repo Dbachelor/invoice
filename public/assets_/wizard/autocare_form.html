@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Wizard - a JavaScript jQuery Step Wizard plugin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Include SmartWizard CSS -->
+    <link href="css/smart_wizard.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Optional SmartWizard theme -->
+    <link href="css/smart_wizard_theme_circles.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/smart_wizard_theme_arrows.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/smart_wizard_theme_dots.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        .sw-container{
+            height: auto !important;
+        }
+        hr{
+             border: 1px solid #dddddd;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<!--    <form class="form-inline">-->
+<!--        <label>External Buttons:</label>-->
+<!--        <div class="btn-group navbar-btn" role="group">-->
+<!--            <button class="btn btn-success" id="prev-btn" type="button">Back</button>-->
+<!--            <button class="btn btn-success" id="next-btn" type="button">Next</button>-->
+<!--            <button class="btn btn-primary" id="reset-btn" type="button">Reset</button>-->
+<!--        </div>-->
+<!--    </form>-->
+
+    <br /><br /><br />
+
+    <!-- SmartWizard html -->
+    <div class="row">
+    <div id="smartwizard" class="col-md-8">
+        <ul>
+            <li><a href="#step-1">Car Location</a></li>
+            <li><a href="#step-2"> Services</a></li>
+            <li><a href="#step-3"> Appointment Time</a></li>
+            <li><a href="#step-4">Review & Book</a></li>
+        </ul>
+
+        <div>
+            <div id="step-1" class="">
+                <h3>GET INSTANT SERVICE QUOTE</h3>
+                <form class="needs-validation" id="info_form" novalidate>
+
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <hr style="color: #ee1e24">
+                                <h4 class="text-center">CONTACT INFORMATION</h4>
+                            <hr >
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="name">Contact Name</label>
+                            <input type="text" class="form-control  form-control-lg" id="name" placeholder="Name" required>
+                            <div class="invalid-feedback">
+                                Invalid Value
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="phone_num">Phone Number</label>
+                            <input type="tel" class="form-control  form-control-lg" id="phone_num" placeholder="070xxxxxxx" required>
+                            <div class="invalid-feedback">
+                                Invalid Value
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control  form-control-lg" id="email" placeholder="email@mail.com" required>
+                            <div class="invalid-feedback">
+                                Invalid Value
+                            </div>
+                        </div>
+
+                        <div class="col-md-12"><hr> <h4 class="text-center">VEHICLE INFORMATION</h4><hr></div>
+                        <div class="col-md-6 mb-3">
+                            <label for="make">Make</label>
+                            <input type="email" class="form-control  form-control-lg" id="make" placeholder="Honda" required>
+                            <div class="invalid-feedback">
+                                Invalid Value
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="model">Model</label>
+                            <input type="text" class="form-control  form-control-lg" id="model" placeholder="Civic" required>
+                            <div class="invalid-feedback">
+                                Invalid Value
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="year">Year</label>
+                            <input type="text" class="form-control  form-control-lg" id="year" placeholder="2020" required>
+                            <div class="invalid-feedback">
+                                Invalid Value
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="mileage">Mileage</label>
+                            <input type="text" class="form-control  form-control-lg" id="mileage" placeholder="Mileage in kilometers" required>
+                            <div class="invalid-feedback">
+                                Invalid Value
+                            </div>
+                        </div>
+
+                        <div class="col-md-12"><hr> <h4 class="text-center">APPOINTMENT INFORMATION</h4><hr></div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="appointment_date">Date</label>
+                            <input type="text" class="form-control  form-control-lg" id="appointment_date" placeholder="2020-01-01" required>
+                            <div class="invalid-feedback">
+                                Invalid Value
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="appointment_time">Time</label>
+                            <input type="text" class="form-control  form-control-lg" id="appointment_time" placeholder="2:00pm" required>
+                            <div class="invalid-feedback">
+                                Invalid Value
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            Would you like us to pick up your vehicle ?
+                        </div>
+                        <div class="col-md-5 mb-3">
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label" for="inlineRadio1">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                <label class="form-check-label" for="inlineRadio2">No</label>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-12 mb-3">
+                            <label for="additonal_details">Additional Details</label>
+                            <textarea class="form-control" id="additonal_details" rows="5"></textarea>
+                            <div class="invalid-feedback">
+                                Invalid Value
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+            <div id="step-2" class="">
+                <h2>Step 2 Content</h2>
+                <div>Information for step 2</div>
+            </div>
+            <div id="step-3" class="">
+                You may use a form as well!
+            </div>
+            <div id="step-4" class="">
+                <h2>Step 4 Content</h2>
+                <div class="panel panel-default">
+                    <div class="panel-heading">My Details</div>
+                    <table class="table">
+                        <tbody>
+                        <tr> <th>Name:</th> <td>Your Name</td> </tr>
+                        <tr> <th>Email:</th> <td>abc@example.com</td> </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4"><br>
+        <h3>Total Quote Price</h3>
+
+    </div>
+    </div>
+
+</div>
+
+<!-- Include jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!-- Include SmartWizard JavaScript source -->
+<script type="text/javascript" src="js/jquery.smartWizard.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        // Smart Wizard
+        $('#smartwizard').smartWizard({
+            selected: 0,
+            theme: 'default',
+            transitionEffect:'slide',
+            toolbarSettings: {toolbarPosition: 'bottom',
+                toolbarExtraButtons: [
+                    {label: 'Finish', css: 'btn-danger', onClick: function(){ alert('Finish Clicked'); }}
+                    // {label: 'Cancel', css: 'btn-warning', onClick: function(){ $('#smartwizard').smartWizard("reset"); }}
+                ]
+            }
+        });
+
+
+
+
+
+
+        $('#smartwizard').smartWizard("theme", "arrows");
+
+    });
+
+
+</script>
+
+
+</body>
+</html>
+
