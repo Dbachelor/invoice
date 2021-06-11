@@ -67,7 +67,7 @@ Route::get('/add-vat/{id}', $path . 'HomeController@addvat')->name('add.vat');
 Route::get('/remove-vat/{id}', $path . 'HomeController@removevat')->name('remove.vat');
 Route::get('/getUserDetails', $path . 'HomeController@getUserDetails')->name('getDetails');
 Route::get('/deleteUserAccount', $path . 'HomeController@deleteUserById')->name('deleteUserById');
-
+Route::get('/deleteInvoice', $path . 'HomeController@deleteInvoiceById')->name('deleteInvoiceById');
 
 
 

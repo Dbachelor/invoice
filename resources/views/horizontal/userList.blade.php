@@ -77,7 +77,7 @@
             <th>Email</th>
             <th>User Type</th>
             <th>Date Created</th>
-            <th class="text-center">Action</th>
+            <th class="text-center pull-right" style="float:right; margin-right:7px">Action</th>
           </tr>
         </thead>
         <tbody class="bg-white" style='font-weight:bold'>
@@ -90,10 +90,10 @@
             <td>{{$user->email}}</td>
             <td>{{$user->type}}</td>
             <th>{{$user->created_at}}</td>
-            <td class="pull-right">
+            <td class="pull-right" style="float:right; margin-right:12px">
               @if($user->type == 'normal_user')
               <a data-toggle="modal" class="btn btn-primary text-white" data-target="#approve"  onclick="setID({{$user->id}})"><i class="fa fa-arrows"></i> Update</a>
-              <a  class="btn btn-danger"   onclick="promptDelete({{$user->id}})"><i class="fa fa-times"></i> Delete</a>
+              <a  class="btn btn-danger"   onclick="promptDelete({{$user->id}})"><i class="fa fa-trash-o"></i> Delete</a>
               @else
               <a data-toggle="modal" class=" disabled btn btn-primary"  onclick=""><i class="fa fa-arrows" data-toggle="tooltip" data-original-title="Edit Organization"></i>  Admin User</a>
               @endif

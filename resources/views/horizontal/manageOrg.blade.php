@@ -3,6 +3,7 @@
 .fa-eye .fa-pencil, .fa-times{
     font-size:16px
 }
+.btn{padding:6px 10px 6px 10px}
 </style>
 <div class="wrapper">
         <div class="container-fluid">
@@ -24,7 +25,7 @@
         <th>Email</th>
         
         <th>
-        	<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#org">Add Org &nbsp <i class="fa fa-plus"></i></button>
+        	<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#org">Add Org &nbsp <i class="fa fa-plus"></i></button>
         </th>
       </tr>
     </thead>
@@ -38,7 +39,7 @@
       	<td>{{$organ->orgAddress}}</td>
       	<td>{{$organ->orgEmail}}</td>
       	<td style="width:200px">
-      		<p><a href="#" class="btn btn-danger btn-sm " data-toggle="tooltip" data-original-title="Delete Organization" onclick="delete_org({{$organ->id}})"><i class="fa fa-remove"></i></a> <a data-toggle="modal" class="btn btn-info btn-sm "  onclick="load_org({{$organ->id}})"><i class="fa fa-pencil" data-toggle="tooltip" data-original-title="Edit Organization"></i></a>
+      		<p><a href="#" class="btn btn-secondary btn-sm " data-toggle="tooltip" data-original-title="Delete Organization" onclick="delete_org({{$organ->id}})"><i class="fa fa-trash-o"></i></a> <a data-toggle="modal" class="btn btn-secondary btn-sm "  onclick="load_org({{$organ->id}})"><i class="fa fa-pencil" data-toggle="tooltip" data-original-title="Edit Organization"></i></a>
           <a href="{{url('manageInvoice')}}?org_id={{$organ->id}}" data-toggle="tooltip" data-original-title="View Invoices" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
       	</p></td>
         

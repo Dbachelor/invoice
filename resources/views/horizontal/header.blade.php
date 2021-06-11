@@ -33,6 +33,12 @@
 <script src = "http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer ></script>
     <script src="{{ url('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
     <!--Morris Chart CSS -->
+    <style>
+        #chartdiv2 {
+          width: 100%;
+          height: 350px;
+        }
+        </style>
     <style type="style/css">
     #myTable{width:100%; overflow-x:auto;}
 

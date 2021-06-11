@@ -3,6 +3,8 @@
 <div class="wrapper">
         <div class="container-fluid">
 	<div>
+    <th style="float:right"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inv">New Item &nbsp<i class="fa fa-plus"></i></button></th>
+            
     <!-- Content Header (Page header) -->
     
     <!-- Main content --><hr>
@@ -74,9 +76,7 @@
               <th>Unit Cost</th>
               <th>Discount</th>
               <th>Total</th>
-              <th></th>
-              <th><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#inv"><i class="fa fa-plus"></i></button></th>
-              <th></th>
+               <th>Edit</th><th>Trash</th>
               {{-- <th></th> --}}
               
             </tr>
@@ -100,7 +100,7 @@
               <td>{{$addition->productName}}</td>
               <td>{{$addition->id}}</td>
               <td>{{$addition->description}}</td>
-              <td>{{$addition->quantity}}</td>
+              <td style="text-align: center; color:blue"><button class="btn btn-info">{{$addition->quantity}}</button></td>
               <td>{{number_format($addition->unitcost,2)}}</td>
               <td>{{number_format($addition->discount,2)}}%</td>
               @if($addition->discount)
@@ -108,7 +108,7 @@
               @else
               <td>{{number_format($addition->quantity * $addition->unitcost,2 )}}</td>
               @endif
-              <td></td>
+            
               <td>
                 @if($invoice->status == 0)
                 <a href="#" class="btn btn-info" onclick="load_org({{$addition->id}})"><i class="fa fa-pencil"></i></a>
@@ -120,7 +120,7 @@
               </td>
              	
             <td>
-                <form action="{{ route('delete',$addition->id) }}" method="post">
+               {{-- <form action="{{ route('delete',$addition->id) }}" method="post">
            @csrf
            @method('delete')
            @if($invoice->status == 0)
@@ -129,7 +129,13 @@
            <button type="submit" class="disabled btn btn-default"> <i class="fa fa-trash"></i></button>
            @endif
            </form>
-                
+                --}}
+                @if($invoice->status == 0)
+           <button type="submit" onclick="promptDelete(this.id)" id="{{ $addition->id }}" class="btn btn-danger"> <i class="fa fa-trash"></i></button>
+           @elseif($invoice->status == 1)
+           <button type="submit" onclick="promptDelete(this.id)" id="{{ $addition->id }}" class="disabled btn btn-default"> <i class="fa fa-trash"></i></button>
+           @endif
+
             </td> 
 
             </tr>
@@ -473,6 +479,40 @@ function printFrame(id) {
             frm.focus();// focus on contentWindow is needed on some ie versions
             frm.print();
             return false;
+}
+
+function promptDelete(id){
+  swal({
+  title: "Are You Sure",
+  text: "Once deleted, you won'\t be able to recover this document",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    var obj = new XMLHttpRequest();
+    obj.onreadystatechange = function(){
+        if(obj.readyState == 4){
+            if(obj.responseText == "document deleted"){
+            swal("Document Has Been Deleted", {
+      icon: "success",
+    });
+    setTimeout(function(){ window.location="{{ route('manageInvoice') }}"; }, 2000);
+            }else{
+                swal("Failed to delete document please try again or contact support")
+            }
+        }
+    }
+    obj.open("GET", "{{route('deleteInvoiceById') }}?id=" + id, true)
+    obj.send();
+
+
+    
+  } else {
+    swal("operation aborted");
+  }
+});
 }
 </script>
 

@@ -15,6 +15,7 @@ use Seguce92\DomPDF\PDF;
 use \App\Notifications\emailInvoice;
 use App\Mail\SendInvoice;
 use Mail;
+use DB;
 //use App\Models\Invoice;
 
 class HomeController extends Controller
@@ -356,8 +357,9 @@ class HomeController extends Controller
            $inv=$inv->where('orgid',$request->org_id);
         }
         $inv=$inv->paginate('10');
+        $arr = $this->activityGenerator(2019);
         $organ_ddl = \App\Organization::orderBy('orgName', 'asc')->get();
-    	return view('horizontal.index', compact('count','countOrg','countInv','countApp','countUsers', 'inv','pending_inv','organ_ddl','approved_inv','count_approved_inv','count_pending_inv', 'inv_per', 'app_per', 'offset_'));
+    	return view('horizontal.index', compact('count','countOrg','countInv','countApp','countUsers', 'inv','pending_inv','organ_ddl','approved_inv','count_approved_inv','count_pending_inv', 'inv_per', 'app_per', 'offset_', $arr));
     }
     
     public static function showcompanyName($id){
@@ -518,5 +520,47 @@ class HomeController extends Controller
             return "operation failed";
         }
     }
+
+    public function activityGenerator($offset){
+        $limit = date('Y');
+        //array to hold values of data for each year starting from 2019
+        $arr = array();
+        for ($i = $offset; $i < $limit; $i++){
+            $sel = DB::select("select created_at from items where YEAR('created_at') = ?", [$i]);
+            array_push($arr, count($sel));
+        }
+        return $arr;
+    }
+
+
+public function deleteInvoiceById(Request $request){
+    $del = DB::table('items')->where('id', $request->id);
+    $done = $del->delete();
+    if($done){
+        return "document deleted";
+    }else{
+        return "operation failed";
+    }
+}
+
+private function getUsersCreatedByYear($year){
+    return \App\User::whereYear("created_at", $year)->count();
+}
+
+private function getInvoicesCreatedByYear($year){
+    return \App\Invoice::whereYear("created_at", $year)->count();
+}
+
+private function getItemsCreatedByYear($year){
+    return \App\Item::whereYear("created_at", $year)->count();
+}
+
+private function getOrgCreatedByYear($year){
+    return \App\Organ::whereYear("created_at", $year)->count();
+}
+
+public function statsByYear($year){
+    $i  
+}
 
 }
